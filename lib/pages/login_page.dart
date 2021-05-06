@@ -1,36 +1,21 @@
-import 'package:ecommerce_app_f2/pages/login_page.dart';
+import 'package:ecommerce_app_f2/pages/register_page.dart';
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatefulWidget {
-  static const routeName = '/register';
+class LoginPage extends StatefulWidget {
+  static const routeName = '/login';
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  String _username, _email, _password;
+  String _email, _password;
   bool _obscurePasswordTxt = true;
 
   Widget _showTitle() => Text(
-        'Register',
-        style: Theme.of(context)
-            .textTheme
-            .headline5
-            .copyWith(color: Colors.orangeAccent),
-      );
-  Widget _showUsernameInput() => TextFormField(
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'Username',
-          hintText: 'Enter username, min length 3',
-          icon: Icon(
-            Icons.face,
-            color: Colors.grey,
-          ),
-        ),
-        validator: (val) => val.length < 3 ? 'Username too short' : null,
-        onSaved: (val) => _username = val,
+        'Login',
+        style:
+            Theme.of(context).textTheme.headline5.copyWith(color: Colors.amber),
       );
 
   Widget _showEmailInput() => TextFormField(
@@ -48,7 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
       );
 
   Widget _showPasswordInput() => TextFormField(
-        obscureText: true,
+        obscureText: _obscurePasswordTxt,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           labelText: 'Password',
@@ -89,15 +74,15 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           FlatButton(
             onPressed: () =>
-                Navigator.pushReplacementNamed(context, LoginPage.routeName),
+                Navigator.pushReplacementNamed(context, RegisterPage.routeName),
             child: RichText(
               text: TextSpan(
-                text: 'Existing User ? ',
+                text: 'New User ? ',
                 children: [
                   TextSpan(
-                    text: 'Login',
+                    text: 'Register',
                     style: TextStyle(
-                      color: Colors.amber,
+                      color: Colors.orangeAccent,
                     ),
                   ),
                 ],
@@ -118,7 +103,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Register'),
+        title: Text('Login'),
       ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 16),
@@ -130,9 +115,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 children: [
                   //TITLE
                   _showTitle(),
-                  SizedBox(height: 20),
-                  //USERNAME
-                  _showUsernameInput(),
                   SizedBox(height: 20),
                   //EMAIL
                   _showEmailInput(),
