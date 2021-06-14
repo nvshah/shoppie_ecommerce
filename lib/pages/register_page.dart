@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ecommerce_app_f2/pages/products_page.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:ecommerce_app_f2/pages/login_page.dart';
@@ -141,18 +142,39 @@ class _RegisterPageState extends State<RegisterPage> {
     setState(() {
       isSubmitting = false;
     });
-    _showSnackBar();
-    _formKey.currentState.reset();
+    if (response.statusCode == 200) {
+      print('Register Response -> $responseBody');
+      _showSnackBar(
+        text: 'User $_username successfully created!',
+        textColor: Colors.green,
+      );
+      _formKey.currentState.reset(); //Reset Form
+      //Success
+      _redirectUser();
+    } else {
+      final errorMessage = responseBody['message'];
+      _showSnackBar(text: errorMessage, textColor: Colors.red);
+      throw Exception('Error Registering: $errorMessage');
+    }
   }
 
-  void _showSnackBar() {
+  void _showSnackBar({String text, Color textColor}) {
     final snackBar = SnackBar(
       content: Text(
-        'User $_username successfully created!',
-        style: TextStyle(color: Colors.green),
+        text ?? ' ',
+        style: TextStyle(color: textColor ?? Colors.white),
       ),
     );
     _scaffoldKey.currentState.showSnackBar(snackBar);
+  }
+
+  void _redirectUser() {
+    Future.delayed(
+      Duration(seconds: 2),
+      () {
+        Navigator.pushReplacementNamed(context, ProductsPage.routeName);
+      },
+    );
   }
 
   @override

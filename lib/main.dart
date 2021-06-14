@@ -1,4 +1,5 @@
 import 'package:ecommerce_app_f2/pages/login_page.dart';
+import 'package:ecommerce_app_f2/pages/products_page.dart';
 import 'package:ecommerce_app_f2/pages/register_page.dart';
 import 'package:flutter/material.dart';
 
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       routes: {
         RegisterPage.routeName: (context) => RegisterPage(),
         LoginPage.routeName: (context) => LoginPage(),
+        ProductsPage.routeName: (context) => ProductsPage(),
       },
       //home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
