@@ -30,6 +30,10 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   http: ^0.12.2
+  shared_preferences: ^0.5.12
+  #State Management
+  flutter_redux: ^0.5.3
+  redux_thunk: ^0.2.1
 
 dev_dependencies:
   flutter_test:

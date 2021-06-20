@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:ecommerce_app_f2/pages/register_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = '/login';
@@ -128,6 +129,7 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       isSubmitting = false;
     });
+    _storeUserData(responseBody);
     if (response.statusCode == 200) {
       print('Login Response -> $responseBody');
       _showSnackBar(
@@ -161,6 +163,14 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushReplacementNamed(context, ProductsPage.routeName);
       },
     );
+  }
+
+  Future<void> _storeUserData(Map<String, dynamic> data) async {
+    final prefs = await SharedPreferences.getInstance();
+    Map<String, dynamic> userData;
+    userData = data['user'];
+    userData.putIfAbsent('jwt', () => data['jwt']);
+    prefs.setString('user', json.encode(userData));
   }
 
   @override

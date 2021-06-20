@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:ecommerce_app_f2/pages/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterPage extends StatefulWidget {
   static const routeName = '/register';
@@ -126,6 +127,14 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
+  Future<void> _storeUserData(Map<String, dynamic> data) async {
+    final prefs = await SharedPreferences.getInstance();
+    Map<String, dynamic> userData;
+    userData = data['user'];
+    userData.putIfAbsent('jwt', () => data['jwt']);
+    prefs.setString('user', json.encode(userData));
+  }
+
   void _registerUser() async {
     setState(() {
       isSubmitting = true;
@@ -142,6 +151,8 @@ class _RegisterPageState extends State<RegisterPage> {
     setState(() {
       isSubmitting = false;
     });
+    //Cache User Token
+    _storeUserData(responseBody);
     if (response.statusCode == 200) {
       print('Register Response -> $responseBody');
       _showSnackBar(
