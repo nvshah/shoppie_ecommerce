@@ -23,7 +23,7 @@ void main() {
 class MyApp extends StatelessWidget {
   final Store<AppState> store;
 
-  MyApp({@required this.store});
+  MyApp({this.store});
   @override
   Widget build(BuildContext context) {
     //Inorder to provide redux store to app

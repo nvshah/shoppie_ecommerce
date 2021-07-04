@@ -1,8 +1,9 @@
+import 'package:ecommerce_app_f2/models/user.dart';
 import 'package:flutter/cupertino.dart';
 
 @immutable
 class AppState {
-  final dynamic user;
+  final User user;
   AppState({@required this.user});
 
   factory AppState.initial() => AppState(user: null);
