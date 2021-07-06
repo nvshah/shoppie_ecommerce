@@ -4,7 +4,11 @@ import 'package:flutter/cupertino.dart';
 @immutable
 class AppState {
   final User user;
-  AppState({@required this.user});
+  final List<dynamic> products;
+  AppState({
+    @required this.user,
+    @required this.products,
+  });
 
-  factory AppState.initial() => AppState(user: null);
+  factory AppState.initial() => AppState(user: null, products: []);
 }
