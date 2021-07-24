@@ -62,6 +62,8 @@ class _ProductsPageState extends State<ProductsPage> {
     //       state.user != null ? Text('${state.user.username}') : Text(' '),
     //   converter: (store) => store.state,
     // );
+    final potraitMode =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return Scaffold(
       appBar: _appBar,
       body: Container(
@@ -77,7 +79,12 @@ class _ProductsPageState extends State<ProductsPage> {
                     bottom: false,
                     child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2),
+                        crossAxisCount: potraitMode ? 2 : 3,
+                        mainAxisSpacing: 4.0,
+                        crossAxisSpacing: 4.0,
+                        //Inorder to maintain good spacing overall side
+                        childAspectRatio: potraitMode ? 1.0 : 1.3,
+                      ),
                       itemCount: state.products.length,
                       itemBuilder: (context, i) {
                         return ProductItem(item: state.products[i]);
