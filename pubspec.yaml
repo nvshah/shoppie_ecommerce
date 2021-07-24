@@ -35,6 +35,9 @@ dependencies:
   flutter_redux: ^0.5.3
   redux_thunk: ^0.2.1
 
+  #For logging 
+  redux_logging: ^0.3.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
