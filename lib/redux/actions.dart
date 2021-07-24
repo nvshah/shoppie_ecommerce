@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:ecommerce_app_f2/models/products.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:ecommerce_app_f2/models/app_state.dart';
@@ -22,7 +23,8 @@ ThunkAction<AppState> getUserAction = (Store<AppState> store) async {
 /* Products Actions */
 ThunkAction<AppState> getProductsAction = (Store<AppState> store) async {
   http.Response response = await http.get('http://localhost:1337/products');
-  final List<dynamic> products = json.decode(response.body);
+  final List<dynamic> responseData = json.decode(response.body);
+  final products = [for (var data in responseData) Product.fromJson(data)];
   store.dispatch(GetProductsAction(products));
 };
 
@@ -33,7 +35,7 @@ class GetUserAction {
 }
 
 class GetProductsAction {
-  final List<dynamic> _products;
-  List<dynamic> get products => _products;
+  final List<Product> _products;
+  List<Product> get products => _products;
   GetProductsAction(this._products);
 }

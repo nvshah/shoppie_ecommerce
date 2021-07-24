@@ -1,5 +1,6 @@
 import 'package:ecommerce_app_f2/global_props.dart';
 import 'package:ecommerce_app_f2/models/app_state.dart';
+import 'package:ecommerce_app_f2/widgets/product_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
@@ -79,7 +80,7 @@ class _ProductsPageState extends State<ProductsPage> {
                           crossAxisCount: 2),
                       itemCount: state.products.length,
                       itemBuilder: (context, i) {
-                        return Text(state.products[i]['name']);
+                        return ProductItem(item: state.products[i]);
                       },
                     ),
                   ),
